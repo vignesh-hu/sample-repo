@@ -1,2 +1,0 @@
-# sample-repo
-sample one

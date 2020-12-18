@@ -1,0 +1,8 @@
+[Unit]
+Description=Script to monitor Tomcat process
+
+[Service]
+User=wildfly
+ExecStart=/bin/bash -c "cd /opt/bin/ ; exec bin/standalon.sh"
+Restart=on-failure
+
