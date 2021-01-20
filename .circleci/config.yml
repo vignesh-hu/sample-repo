@@ -8,6 +8,7 @@ jobs:
 
     docker:
       - image: circleci/openjdk:8-jdk-browsers
+      - image: docker:17.05.0-ce-git
    
 #    branches:
 #      ignore:
