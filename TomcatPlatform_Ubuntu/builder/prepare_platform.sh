@@ -1,7 +1,0 @@
-
-
-. $BUILDER_DIR/CONFIG
-
-
-
-

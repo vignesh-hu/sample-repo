@@ -1,0 +1,58 @@
+version: 2
+
+jobs:
+
+  build:
+    
+    working_directory: ~/src
+
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+   
+#    branches:
+#      ignore:
+ #       - /branch1
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: spring-framework-petclinic-{{ checksum "pom.xml" }}
+      
+      - run: mvn clean package
+      
+      - run: mvn install -DskipTests=true 
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: spring-framework-petclinic-{{ checksum "pom.xml" }}
+
+      - persist_to_workspace:
+          root: ~/src
+          paths:
+            - target/spring-framework-petclinic.war
+
+  test:
+    working_directory: ~/src
+
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: spring-framework-petclinic-{{ checksum "pom.xml" }}
+
+      - run: mvn test
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: spring-framework-petclinic-{{ checksum "pom.xml" }}
+
+      - persist_to_workspace:
+          root: ~/src
+          paths:
+            - target/surefire-reports
