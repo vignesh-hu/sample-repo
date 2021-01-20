@@ -32,6 +32,8 @@ jobs:
           root: ~/src
           paths:
             - target/petclinic.war
+      - store_artifacts:
+          path: /tmp/petclinic
 
   test:
     working_directory: ~/src
