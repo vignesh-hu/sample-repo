@@ -7,8 +7,8 @@ jobs:
     working_directory: ~/src
 
     docker:
-      - image: circleci/openjdk:8-jdk-browsers
-      
+#      - image: circleci/openjdk:8-jdk-browsers
+      - image: mavenlink/ecr-tools     
    
 #    branches:
 #      ignore:
