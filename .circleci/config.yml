@@ -32,7 +32,7 @@ jobs:
       - persist_to_workspace:
           root: ~/src
           paths:
-            - target/petclinic.war
+            - tmp/petclinic.war
       - store_artifacts:
           path: /tmp/petclinic
 
