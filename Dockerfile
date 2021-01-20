@@ -29,9 +29,9 @@ ENV LAUNCH_JBOSS_IN_BACKGROUND true
 #RUN yum install epel-release -y
 #RUN yum install jq -y
 
-ARG APP_FILE=target/petclinic.war
+#ARG APP_FILE=target/petclinic.war
 # Add your application to the deployment folder
-ADD ${APP_FILE} /opt/connectleader/wildfly/standalone/deployments/${APP_FILE}
+COPY /home/circleci/src/target/petclinic.war /opt/connectleader/wildfly/standalone/deployments/
 
 USER root
 
