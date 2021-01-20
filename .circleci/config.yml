@@ -71,7 +71,7 @@ jobs:
           paths:
             - target/surefire-reports
   docker-deploy:
-   <<: *defaults
+    <<: *defaults
       
     steps:
       - checkout
