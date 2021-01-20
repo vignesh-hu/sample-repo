@@ -23,6 +23,7 @@ jobs:
       - run: mvn clean package
       
       - run: mvn install -DskipTests=true 
+      - run: docker build -t app .
 
       - save_cache:
           paths:
@@ -32,7 +33,7 @@ jobs:
       - persist_to_workspace:
           root: ~/src
           paths:
-            - tmp/petclinic.war
+            - target/petclinic.war
       - store_artifacts:
           path: /tmp/petclinic
 
