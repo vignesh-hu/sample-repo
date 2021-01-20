@@ -1,7 +1,8 @@
 defaults: &defaults
    working_directory: ~/src
    docker:
-     - image: zhukovsd/typing-test-build-env:latest
+     - image: circleci/openjdk:8-jdk-browsers
+     - image: docker:17.05.0-ce-git
 
 version: 2
 
