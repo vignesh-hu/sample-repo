@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt install docker.io  -y
+            sudo apt install docker.io  -y
             
       - run: mvn clean package
       
