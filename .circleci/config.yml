@@ -83,7 +83,7 @@ jobs:
       #    command: |
       #      docker run -a STDOUT -it -p 4100:3000 --link mongo_test:db --name test_app app gulp test
       #      #docker exec -t test_app gulp test
-      - push-to-ecr-repo:
+      - pushrepo:
           name: Push application Docker image
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
