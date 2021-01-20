@@ -25,6 +25,8 @@ jobs:
           name: Install dependencies
           command: |
             sudo apt install docker.io  -y
+            sudo systemctl start docker
+            sudo systemctl enable docker
             
       - run: mvn clean package
       
