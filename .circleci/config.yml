@@ -1,17 +1,18 @@
+defaults: &defaults
+   working_directory: ~/src
+   docker:
+     - image: zhukovsd/typing-test-build-env:latest
+
 version: 2
 
 jobs:
 
   build:
+    <<: *defaults
     
-    working_directory: ~/src
-
-    docker:
-      - image: circleci/openjdk:8-jdk-browsers
-     
-
-
-   
+    environment:
+      # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m   
 #    branches:
 #      ignore:
  #       - /branch1
@@ -21,17 +22,18 @@ jobs:
 
       - restore_cache:
           key: spring-framework-petclinic-{{ checksum "pom.xml" }}
-      - run:
-          name: Install dependencies
-          command: |
-            sudo apt install docker.io  -y
-            sudo service start docker
-            sudo service enable docker
+      
             
       - run: mvn clean package
       
       - run: mvn install -DskipTests=true 
-      - run: docker build -t app .
+      - persist_to_workspace:
+          root: .
+          # Must be relative path from root
+          paths:
+            - Dockerfile
+            - target/*
+           
 
       - save_cache:
           paths:
@@ -69,9 +71,7 @@ jobs:
           paths:
             - target/surefire-reports
   docker-deploy:
-    working_directory: ~/src
-    docker:
-      - image: docker:17.05.0-ce-git
+   <<: *defaults
       
     steps:
       - checkout
