@@ -7,8 +7,8 @@ jobs:
     working_directory: ~/src
 
     docker:
-#      - image: circleci/openjdk:8-jdk-browsers
-      - image: mavenlink/ecr-tools:75316cde7ed3d4070cb8ac70fff9944cff3584f2
+      - image: circleci/openjdk:8-jdk-browsers
+     
 
 
    
@@ -21,7 +21,11 @@ jobs:
 
       - restore_cache:
           key: spring-framework-petclinic-{{ checksum "pom.xml" }}
-      
+      - run:
+          name: Install dependencies
+          command: |
+            yum install docker -y
+            
       - run: mvn clean package
       
       - run: mvn install -DskipTests=true 
