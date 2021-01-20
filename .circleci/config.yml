@@ -24,9 +24,12 @@ jobs:
           key: spring-framework-petclinic-{{ checksum "pom.xml" }}
       
             
-      - run: mvn clean package
+      - run:
+          name: Build & Testing
+          command: |
+            mvn package --offline
       
-      - run: mvn install -DskipTests=true 
+ #     - run: mvn install -DskipTests=true 
       - persist_to_workspace:
           root: .
           # Must be relative path from root
