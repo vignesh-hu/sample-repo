@@ -31,7 +31,7 @@ ENV LAUNCH_JBOSS_IN_BACKGROUND true
 
 #ARG APP_FILE=target/petclinic.war
 # Add your application to the deployment folder
-COPY /home/circleci/src/target/petclinic.war /opt/connectleader/wildfly/standalone/deployments/
+COPY ./target/petclinic.war /opt/connectleader/wildfly/standalone/deployments/
 
 USER root
 
