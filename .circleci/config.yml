@@ -31,7 +31,7 @@ jobs:
       - persist_to_workspace:
           root: ~/src
           paths:
-            - target/spring-framework-petclinic.war
+            - target/petclinic.war
 
   test:
     working_directory: ~/src
