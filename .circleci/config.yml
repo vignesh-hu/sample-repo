@@ -34,13 +34,9 @@ jobs:
           paths:
             - ~/.m2
           key: spring-framework-petclinic-{{ checksum "pom.xml" }}
-
-      - persist_to_workspace:
-          root: ~/src
-          paths:
-            - webapp/*.war
+          
       - store_artifacts:
-          path: /tmp/petclinic
+          path: /root/src/target/petclinic.war
 
   test:
     working_directory: ~/src
