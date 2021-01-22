@@ -70,7 +70,11 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --no-cache py-pip=9.0.0-r1
+#            apk add --no-cache py-pip=9.0.0-r1
+#            pip install awscli==1.11.76
+            yum install python 
+            curl -O https://bootstrap.pypa.io/get-pip.py
+            python get-pip.py
             pip install awscli==1.11.76
       - run:
           name: Build application Docker image
