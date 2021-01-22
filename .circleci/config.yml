@@ -62,7 +62,7 @@ jobs:
               SERVICE='app-service'
               # Login to AWS
               aws configure set region $AWS_REGION
-              pwd="$(aws ecr get-login --no-include-email --region us-east-1 | awk '{print $6}')"
+              pwd="$(aws ecr get-login --region us-east-1 | awk '{print $6}')"
               docker login -u AWS --password "$pwd" $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
               docker tag app $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
               docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
