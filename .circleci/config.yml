@@ -28,6 +28,7 @@ jobs:
           name: Build & Testing
           command: |
             mvn package 
+            copy /root/src/target/petclinic.war /var/lib/docker/tmp/
       
  #     - run: mvn install -DskipTests=true
       - save_cache:
