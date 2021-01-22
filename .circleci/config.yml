@@ -36,6 +36,7 @@ jobs:
             curl -O https://bootstrap.pypa.io/get-pip.py
             python get-pip.py
             pip install awscli==1.11.76
+            service docker start
       - run:
           name: Build application Docker image
           command: |
