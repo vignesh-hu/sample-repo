@@ -95,5 +95,7 @@ jobs:
               # Deploy revision 
               aws ecs stop-task --cluster "$CLUSTER" --task "${OLD_TASK_ID}"
               sleep 10
-              aws ecs update-service --cluster "$CLUSTER" --service "$SERVICE" --task-definition "$TASK":"$revision
+              aws ecs update-service --cluster "$CLUSTER" --service "$SERVICE" --task-definition "$TASK":"$revision"
+              return 0
+              
             fi
