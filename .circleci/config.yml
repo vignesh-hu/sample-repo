@@ -50,57 +50,7 @@ jobs:
           
       - store_artifacts:
           path: /root/src/target/petclinic.war
-
-  test:
-    working_directory: ~/src
-
-    docker:
-      - image: circleci/openjdk:8-jdk-browsers
-
-    steps:
-      - checkout
-
-      - restore_cache:
-          key: spring-framework-petclinic-{{ checksum "pom.xml" }}
-
-      - run: mvn test
-
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: spring-framework-petclinic-{{ checksum "pom.xml" }}
-
-      - persist_to_workspace:
-          root: ~/src
-          paths:
-            - target/surefire-reports
-  docker-deploy:
-    <<: *defaults
-      
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Install dependencies
-          command: |
-            yum install python -y
-            curl -O https://bootstrap.pypa.io/get-pip.py
-            python get-pip.py
-            pip install awscli==1.11.76
-      - run:
-          name: Build application Docker image
-          command: |
-            docker build -t app .
-      # If we had
-      #- run:
-      #    name: Run mongo db
-      #    command: |
-      #      docker run --name mongo_test -d mongo
-      #- run:
-      #    name: Run tests
-      #    command: |
-      #      docker run -a STDOUT -it -p 4100:3000 --link mongo_test:db --name test_app app gulp test
-      #      #docker exec -t test_app gulp test
+          
       - run:
           name: Push application Docker image
           command: |
@@ -149,20 +99,3 @@ jobs:
              
               return 0
             fi
-workflows:
-
-  version: 2
-
-  build-test-and-deploy:
-
-    jobs:
-
-      - build
-      - test:
-          requires:
-            - build  
-      - docker-deploy:
-          requires:
-            - test            
-
-      
