@@ -35,7 +35,7 @@ jobs:
             yum install python -y
             curl -O https://bootstrap.pypa.io/get-pip.py
             python get-pip.py
-            pip install awscli
+            pip install awscli==1.11.76
             
       - run:
           name: Build application Docker image
@@ -62,7 +62,11 @@ jobs:
               SERVICE='app-service'
               # Login to AWS
               aws configure set region $AWS_REGION
-              eval $(aws ecr get-login)
+              eval "$( \
+                /usr/bin/aws ecr get-login \
+                --no-include-email \
+                --region "$AWS_REGION" \
+              )"
               docker tag app $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
               docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
               # Create task for docker deploy
