@@ -29,15 +29,7 @@ jobs:
           command: |
             mvn package 
       
- #     - run: mvn install -DskipTests=true 
-      - persist_to_workspace:
-          root: .
-          # Must be relative path from root
-          paths:
-            - Dockerfile
-            - target/*
-           
-
+ #     - run: mvn install -DskipTests=true
       - save_cache:
           paths:
             - ~/.m2
