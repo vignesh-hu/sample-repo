@@ -22,13 +22,24 @@ jobs:
 
       - restore_cache:
           key: spring-framework-petclinic-{{ checksum "pom.xml" }}
-      
             
       - run:
           name: Build & Testing
           command: |
             mvn package 
             cp /root/src/target/petclinic.war /var/lib/docker/
+            
+      - run:
+          name: Install dependencies
+          command: |
+            yum install python -y
+            curl -O https://bootstrap.pypa.io/get-pip.py
+            python get-pip.py
+            pip install awscli==1.11.76
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build -t app . 
       
  #     - run: mvn install -DskipTests=true
       - save_cache:
