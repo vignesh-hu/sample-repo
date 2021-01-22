@@ -74,7 +74,7 @@ jobs:
                 | docker login \
                 --password-stdin \
                 --username AWS \
-                "$ecr_url"
+                --950778703950.dkr.ecr.us-east-1.amazonaws.com
               docker tag app $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
               docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
               # Create task for docker deploy
