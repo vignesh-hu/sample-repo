@@ -86,7 +86,7 @@ jobs:
           
       - store_artifacts:
           path: /root/src/target/petclinic.war
-   *//       
+          
       - run:
           name: Push application Docker image
           command: |
