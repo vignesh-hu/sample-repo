@@ -23,10 +23,10 @@ jobs:
       - restore_cache:
           key: spring-framework-petclinic-{{ checksum "pom.xml" }}
             
-      - run:
-          name: Build & Testing
-          command: |
-            mvn package 
+ #     - run:
+ #         name: Build & Testing
+ #         command: |
+ #           mvn package 
             
             
       - run:
@@ -36,7 +36,7 @@ jobs:
             curl -O https://bootstrap.pypa.io/get-pip.py
             python get-pip.py
             pip install awscli==1.11.76
-      - checkout
+  #    - checkout
       
       - run: mkdir test-reports
       
@@ -73,16 +73,16 @@ jobs:
           path: ~/testng/results/
       - store_artifacts:
           path:  testng/results/                             
-      - run:
-          name: Build application Docker image
-          command: |
-            docker build -t app . 
+   #   - run:
+   #       name: Build application Docker image
+   #       command: |
+   #         docker build -t app . 
       
  #     - run: mvn install -DskipTests=true
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: spring-framework-petclinic-{{ checksum "pom.xml" }}
+   #   - save_cache:
+   #       paths:
+   #         - ~/.m2
+   #       key: spring-framework-petclinic-{{ checksum "pom.xml" }}
           
       - store_artifacts:
           path: /root/src/target/petclinic.war
