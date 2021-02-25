@@ -39,7 +39,7 @@ jobs:
   #    - checkout
       
       - run:
-          name:Create directory to store result
+          name: Create directory to store result
           command: |
             mkdir test-reports
       
