@@ -38,7 +38,10 @@ jobs:
             pip install awscli==1.11.76
   #    - checkout
       
-      - run: mkdir test-reports
+      - run:
+          name:Create directory to store result
+          command: |
+            mkdir test-reports
       
       - run:
           name: Download Selenium
@@ -51,7 +54,10 @@ jobs:
             java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
 
-      - run: mvn dependency:go-offline
+      - run:
+          name:Dependency check
+          command: |
+            mvn dependency:go-offline
 
       - save_cache:
           paths:
@@ -59,7 +65,10 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests!
-      - run: mvn clean integration-test
+      - run:
+          name: Integration testing
+          command: |
+            mvn clean integration-test
       
       - run:
           name: Save test results
