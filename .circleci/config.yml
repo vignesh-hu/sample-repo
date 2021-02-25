@@ -37,7 +37,21 @@ jobs:
 #            python get-pip.py
 #            pip install awscli==1.11.76
   #    - checkout
-      
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build testHTMLproject -t html-server-image:v1
+    
+      - run:
+          name: Run docker image
+          command: |
+            docker run -d -p 80:80 --name htmlContainer html-server-image:v1
+
+            
+      - run:
+          name: Check the images present
+          command: |
+            docker ps
       - run:
           name: Create directory to store result
           command: |
