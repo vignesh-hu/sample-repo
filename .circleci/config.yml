@@ -40,7 +40,7 @@ jobs:
       - run:
           name: Build application Docker images
           command: |
-            docker build testHTMLproject -t html-server-image:v1
+            docker build src -t html-server-image:v1
     
       - run:
           name: Run docker image
