@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Selnium sever test floors" parallel="tests" thread-count="1" verbose="1">
+    <!--sample browser parameter types (chrome, firefox and ie)-->
+    <test name="TC_01">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.aravinda.app.testCase.TC_01_SeleniumxWebPageTest"/>
+        </classes>
+    </test>
+</suite>
